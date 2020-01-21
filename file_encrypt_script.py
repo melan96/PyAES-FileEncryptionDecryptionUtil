@@ -42,9 +42,9 @@ def getSecretKey(password):
 
 
 def Main():
-    # filename=input("file:  ")
-    # password = input("password  :")
-    encrypt_file(getSecretKey('abcd'), 'sample.txt', 1024)
+    filename = raw_input("file:  ")
+    password = raw_input("password  :")
+    encrypt_file(getSecretKey(password), filename, 1024)
     print("DONE ")
 
 
