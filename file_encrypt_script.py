@@ -11,15 +11,19 @@ from Crypto.Hash import SHA256
 
 # Random file postfixes
 from Crypto import Random
+import logging
 
 # Encryption of FILE (METHOD=AES MODE=CBC)
 
 
 def encrypt_file(key, filename, pchunksize):
+
+    logging.info("Encryption started")
     chunksize = pchunksize*1024
     outputFileName = "(encypt)"+filename
     filesize = str(os.path.getsize(filename)).zfill(16)
     IV = Random.new().read(16)
+    logging.info("Encryption definitions configured")
 
     encryptor = AES.new(key, AES.MODE_CBC, IV)
 
@@ -64,12 +68,25 @@ def getSecretKey(password):
     return hashKey.digest()
 
 
+def get UserInputs():
+    # Python dictionaries handlings
+    user_seq = {'filename':, 'password': }
+    user_seq['filename'] = raw_input("file:  ")
+    user_seq['password'] = raw_input("password  :")
+
+
 def Main():
-    filename = raw_input("file:  ")
-    password = raw_input("password  :")
-    #encrypt_file(getSecretKey(password), filename, 1024)
-    #print("DONE ")
-    decrypt_file(getSecretKey(password), filename, 1024)
+    choice = raw_input("Do you wish (E)ncrypt or (D)ecrypt ?")
+
+    if (choice.upper() == 'D'):
+        # Prop to Decrypt
+        print("Preseed E")
+    elif(choice.upper() == 'E'):
+        # Prop to Encrypt
+
+    encrypt_file(getSecretKey(password), filename, 1024)
+    print("DONE ")
+    #decrypt_file(getSecretKey(password), filename, 1024)
 
 
 if __name__ == '__main__':
