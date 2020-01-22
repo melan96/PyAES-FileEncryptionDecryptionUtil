@@ -68,11 +68,16 @@ def getSecretKey(password):
     return hashKey.digest()
 
 
-def get UserInputs():
+def getUserInputs():
     # Python dictionaries handlings
-    user_seq = {'filename':, 'password': }
+    user_seq = {'filename': '', 'password': ''}
+
+    # assign values
     user_seq['filename'] = raw_input("file:  ")
     user_seq['password'] = raw_input("password  :")
+
+    # return dictionaries
+    return user_seq
 
 
 def Main():
@@ -80,13 +85,20 @@ def Main():
 
     if (choice.upper() == 'D'):
         # Prop to Decrypt
-        print("Preseed E")
+        print("Preseed D >> Decryption Util")
+
+        payload = getUserInputs()
+        decrypt_file(getSecretKey(payload.get('password')),
+                     payload.get('filename'), 1024)
+
     elif(choice.upper() == 'E'):
         # Prop to Encrypt
-
-    encrypt_file(getSecretKey(password), filename, 1024)
-    print("DONE ")
-    #decrypt_file(getSecretKey(password), filename, 1024)
+        print("Preseed E >> Encryption Util")
+        payload = getUserInputs()
+        encrypt_file(getSecretKey(payload.get('password')),
+                     payload.get('filename'), 1024)
+    else:
+        print("Invalid Argument : return 0")
 
 
 if __name__ == '__main__':
